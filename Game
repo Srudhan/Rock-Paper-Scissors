@@ -1,0 +1,44 @@
+import random
+
+options = ["Rock", "Paper", "Scissors"]
+user_score = 0
+computer_score = 0
+
+def get_user_choice():
+    while True:
+        user_choice = input("Enter Your choice [Rock/Paper/Scissors]: ").capitalize()
+        if user_choice in options:
+            return user_choice
+        else:
+            print("Invalid choice. Please enter Rock, Paper, or Scissors.")
+
+def determine_winner(user_choice, computer_choice):
+    global user_score, computer_score
+    if user_choice == computer_choice:
+        print(f"It's a tie! Computer also chose {computer_choice}")
+    elif (
+        (user_choice == "Rock" and computer_choice == "Scissors") or
+        (user_choice == "Paper" and computer_choice == "Rock") or
+        (user_choice == "Scissors" and computer_choice == "Paper")
+    ):
+        print(f"You won! Computer chose {computer_choice}")
+        user_score += 1
+    else:
+        print(f"You lost! Computer chose {computer_choice}")
+        computer_score += 1
+
+def display_scores():
+    print(f"Your Score: {user_score}  Computer's Score: {computer_score}")
+
+# Main game loop
+while True:
+    user_choice = get_user_choice()
+    computer_choice = random.choice(options)
+    
+    determine_winner(user_choice, computer_choice)
+    
+    display_scores()
+
+    play_again = input("Do you want to play again? (yes/no): ").lower()
+    if play_again != "yes":
+        break
